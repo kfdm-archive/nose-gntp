@@ -19,6 +19,10 @@ class Growler(GrowlNotifier):
     def failed(self, message, *args):
         self.notify('Failure', 'Failed', message % args, sticky=True)
 
+    def notify_hook(self, packet):
+        identifier = packet.headers['Notification-Title']
+        packet.add_header('Notification-Coalescing-ID', identifier)
+
 
 class NoseGrowl(Plugin):
     """Growl notifications for Nose"""
@@ -41,7 +45,10 @@ class NoseGrowl(Plugin):
 
         endtime_msg = 'Completed in  %s.%s seconds' % (delta.seconds, delta.microseconds)
         if result.wasSuccessful():
-            growl.success("%s tests run ok\n%s" % (result.testsRun, endtime_msg))
+            growl.success("%s tests run ok\n%s",
+                result.testsRun,
+                endtime_msg
+                )
         else:
             growl.failed("%s tests. %s failed. %s errors\n%s",
                 result.testsRun,

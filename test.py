@@ -7,7 +7,7 @@ class TestSuccess(PluginTester, unittest.TestCase):
     activate = '--with-growl'
     plugins = [NoseGrowl()]
 
-    def test_success():
+    def test_success(self):
         assert True
 
     def makeSuite(self):
@@ -21,11 +21,11 @@ class TestFailure(PluginTester, unittest.TestCase):
     activate = '--with-growl'
     plugins = [NoseGrowl()]
 
-    def test_failure():
+    def test_failure(self):
         assert False
 
     def makeSuite(self):
         class TC(unittest.TestCase):
             def runTest(self):
-                assert False
+                assert True
         return unittest.TestSuite([TC()])
