@@ -11,7 +11,7 @@ class Growler(GrowlNotifier):
         )
 
     def message(self, title, message, *args):
-        self.notify('Nose', title, message)
+        self.notify('Nose', title, message % args)
 
     def success(self, message, *args):
         self.notify('Success', 'Success', message % args, sticky=True)
