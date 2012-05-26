@@ -1,4 +1,4 @@
-from setuptools import setup, find_packages
+from setuptools import setup
 
 setup(
     name='nose-gntp',
@@ -8,7 +8,11 @@ setup(
     description='nose plugin for Growl notifications',
     install_requires=['nose>=0.10', 'gntp'],
     license='MIT',
-    packages=find_packages(exclude=['tests']),
+    packages=['nose_gntp'],
+    package_data={'nose_gntp': [
+        './*.png'
+    ]},
+    include_package_files=True,
     entry_points={
         'nose.plugins': [
             'growl=nose_gntp:NoseGrowl'

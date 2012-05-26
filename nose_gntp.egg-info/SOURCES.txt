@@ -1,5 +1,8 @@
+MANIFEST.in
 setup.py
 nose_gntp/__init__.py
+nose_gntp/fail.png
+nose_gntp/ok.png
 nose_gntp.egg-info/PKG-INFO
 nose_gntp.egg-info/SOURCES.txt
 nose_gntp.egg-info/dependency_links.txt

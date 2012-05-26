@@ -1,6 +1,12 @@
 import datetime
+import os
 from nose.plugins import Plugin
 from gntp.config import GrowlNotifier
+
+
+ICON_BASE = os.path.dirname(__file__)
+ICON_OK = open(os.path.join(ICON_BASE, 'ok.png')).read()
+ICON_FAIL = open(os.path.join(ICON_BASE, 'fail.png')).read()
 
 
 class Growler(GrowlNotifier):
@@ -14,10 +20,10 @@ class Growler(GrowlNotifier):
         self.notify('Nose', title, message % args)
 
     def success(self, message, *args):
-        self.notify('Success', 'Success', message % args, sticky=True)
+        self.notify('Success', 'Success', message % args, sticky=True, icon=ICON_OK)
 
     def failed(self, message, *args):
-        self.notify('Failure', 'Failed', message % args, sticky=True)
+        self.notify('Failure', 'Failed', message % args, sticky=True, icon=ICON_FAIL)
 
     def notify_hook(self, packet):
         identifier = packet.headers['Notification-Title']
